@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProduitManager extends JpaRepository<Produit, String> {
-        @Query("select * from produit where estDuJour=:estDuJour")
-        List<Produit> rechercherProduitDuJour(@Param("estDuJour") boolean estDuJour);
+        @Query("SELECT p FROM Produit p WHERE p.estDuJour = :estDuJour")
+        List<Produit> rechercherProduitEstDuJour(@Param("estDuJour") boolean estDuJour);
 }

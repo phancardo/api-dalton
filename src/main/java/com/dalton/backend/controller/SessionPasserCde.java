@@ -12,11 +12,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/produit")
 public class SessionPasserCde {
-    @Autowired
+
     ProduitManager produitManager;
+    @Autowired
+    public SessionPasserCde(ProduitManager produitManager) {
+        this.produitManager = produitManager;
+    }
+
     @GetMapping
     public List<Produit> traiterAccesApplication(){
-        List<Produit> produits = produitManager.rechercherProduitDuJour(true);
+        List<Produit> produits = produitManager.rechercherProduitEstDuJour(true);
         return produits;
     }
 }

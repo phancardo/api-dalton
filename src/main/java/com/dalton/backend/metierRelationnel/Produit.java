@@ -4,7 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+
 
 @Entity
 @Table(name="produit")
