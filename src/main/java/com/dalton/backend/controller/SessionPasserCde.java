@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -19,9 +20,20 @@ public class SessionPasserCde {
         this.produitManager = produitManager;
     }
 
-    @GetMapping
-    public List<Produit> traiterAccesApplication(){
+    @GetMapping("/duJour")
+    public List<Produit> traiterAccesApplication() {
         List<Produit> produits = produitManager.rechercherProduitEstDuJour(true);
         return produits;
+    }
+
+    @GetMapping("/all")
+    public List<Produit> getAllProduits() {
+        List<Produit> produits = produitManager.findAll();
+        return produits;
+    }
+
+    @GetMapping("/{reference}/quantiteEnStock")
+    public int getQuantiteEnStock(@PathVariable String reference) {
+        return produitManager.findQuantiteEnStockByReference(reference);
     }
 }
