@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -23,8 +27,8 @@ public class SessionPasserCde {
         this.utilisateurManager = utilisateurManager;
     }
 
-    @GetMapping
-    public List<Produit> traiterAccesApplication(){
+    @GetMapping("/duJour")
+    public List<Produit> traiterAccesApplication() {
         List<Produit> produits = produitManager.rechercherProduitEstDuJour(true);
         return produits;
     }
@@ -36,5 +40,16 @@ public class SessionPasserCde {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
+    }
+
+    @GetMapping("/all")
+    public List<Produit> getAllProduits() {
+        List<Produit> produits = produitManager.findAll();
+        return produits;
+    }
+
+    @GetMapping("/{reference}/quantiteEnStock")
+    public int getQuantiteEnStock(@PathVariable String reference) {
+        return produitManager.findQuantiteEnStockByReference(reference);
     }
 }
